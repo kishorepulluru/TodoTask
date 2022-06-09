@@ -1,0 +1,91 @@
+<div class="container row">
+
+<div class="col-md-4">
+
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+   
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <h4>categories</h4>
+        <div ><button type="button" class="btn btn-primary" (click)="addNewCategory()">Add New</button></div>
+     
+        <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+          <li class="list-group-item py-1" *ngFor="let category of categories" >
+            <a class="nav-link" href="#" (click)="categoryChanged(category)">{{category}} </a>
+          </li>
+        </ul>
+       
+
+      </div>
+    </div>
+  </nav>
+ 
+</div>
+<div class="col-md-8 todos">
+  <h3>{{categorySelected}} Todo list</h3>
+<button type="button" class="btn btn-primary todo-button" (click)="openPopup()">Add New</button>
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-md-5"> <b>Task</b></div>
+        <div class="col-md-4"> <b>Target Date</b></div>
+        <div class="col-md-3"> <b>Status</b></div>
+      </div>
+    </li>
+    <li class="list-group-item" *ngFor="let list of todos" [ngClass]="{'list-group-item-success':list.done,'list-group-item-danger':!list.done}">
+      <div class="row">
+        <div class="col-md-5"> <b>{{list.task}}</b></div>
+        <div class="col-md-4"> {{list.endDate}}</div>
+        <div class="col-md-3">{{list.done?'Completed':'Pending'}}</div>
+      </div>
+     <!-- test -->
+    </li>
+   
+  </ul>
+
+</div>
+<!-- Modal -->
+
+</div>
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add new task</h4>
+      </div>
+      <div class="modal-body">
+       <div class="row">
+        <div class="col-md-4">
+          Title
+        </div>
+        <div class="col-md-8">
+          <input name="taskTitle" [(ngModel)]="taskTitle" type="text">
+        </div>
+       </div>
+       <div class="row datepikcer">
+        <div class="col-md-4">
+          Completion Date
+        </div>
+        <div class="col-md-8">
+          <input name="completiondate" [(ngModel)]="completiondate" type="Date">
+        </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" 
+        (click)="closePopup()">
+  close
+</button>
+        <button type="button" class="btn btn-success" 
+                (click)="saveTask()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
